@@ -1,9 +1,10 @@
 class FormsController < ApplicationController
   def show
     @form = Form.find(params[:id])
-    
     if params[:search].present?
       @pet_search = Pet.search(params[:search])
+    else params[:adopt] == "true"
+      @pet_search = Pet.search(params[:adopt])
     # else
     #   @pet_search = []
     end

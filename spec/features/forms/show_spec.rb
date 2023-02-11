@@ -6,6 +6,7 @@ RSpec.describe 'Form page', type: :feature do
       @shelter_1 = Shelter.create!(foster_program: false, name: "The Farm", city: "Denver", rank: 2)
       @pet_1 = Pet.create!(adoptable: true, age: 1, breed: "Great Dane", shelter_id: @shelter_1.id, name: 'Scooby')
       @app_1 = Form.create!(name: "John Smith", street_address: "123 Main St.", city: "Denver", state: "CO", zip_code: 80202, description: "I want a pet.", status: 0)
+      @pet_form_1 = PetForm.create!(pet_id: @pet_1.id, form_id: @app_1.id)
     end
     describe 'When I visit a forms show page' do
       it "Then I can see the following:
@@ -43,6 +44,26 @@ RSpec.describe 'Form page', type: :feature do
           expect(current_path).to eq("/forms/#{@app_1.id}")  
       
           expect(page).to have_content("Scooby")
+        end
+        
+        #     5. Add a Pet to an Application
+        # As a visitor
+        # When I visit an application's show page
+        # And I search for a Pet by name
+        # And I see the names Pets that match my search
+        # Then next to each Pet's name I see a button to "Adopt this Pet"
+        # When I click one of these buttons
+        # Then I am taken back to the application show page
+        # And I see the Pet I want to adopt listed on this application
+        it "Then next to each Pet's name I see a button to 'Adopt this Pet' When I click one of these buttons. Then I am taken back to the application show page And I see the Pet I want to adopt listed on this application" do
+          visit "forms/#{@app_1.id}"
+          fill_in :search, with: "Scooby"
+          click_button "Pet Submit"
+          
+          expect(page).to have_button('Adopt this Pet')
+          click_button "Adopt this Pet"
+          expect(current_path).to eq("/forms/#{@app_1.id}")
+          expect(page).to have_content("Names of Pets: Scooby")
         end
       end
     end
