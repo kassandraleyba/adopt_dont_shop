@@ -44,15 +44,6 @@ RSpec.describe 'Form page', type: :feature do
           expect(page).to have_content("Scooby")
         end
         
-        #     5. Add a Pet to an Application
-        # As a visitor
-        # When I visit an application's show page
-        # And I search for a Pet by name
-        # And I see the names Pets that match my search
-        # Then next to each Pet's name I see a button to "Adopt this Pet"
-        # When I click one of these buttons
-        # Then I am taken back to the application show page
-        # And I see the Pet I want to adopt listed on this application
         it "Then next to each Pet's name I see a button to 'Adopt this Pet' When I click one of these buttons. Then I am taken back to the application show page And I see the Pet I want to adopt listed on this application" do
           visit "forms/#{@app_1.id}"
           fill_in :search, with: "Scooby"
@@ -68,36 +59,33 @@ RSpec.describe 'Form page', type: :feature do
 
     # 6. Submit an Application
 
-    # As a visitor
-    # When I visit an application's show page
-    # And I have added one or more pets to the application
-
-    # Then I see a section to submit my application
-    # And in that section I see an input to enter why I would make a good owner for these pet(s)
-    
-    # When I fill in that input
-    # And I click a button to submit this application
-    # Then I am taken back to the application's show page
-
-    # And I see an indicator that the application is "Pending"
-    # And I see all the pets that I want to adopt
-    # And I do not see a section to add more pets to this application
-
-    describe 'And I click a button to submit this application,And I see an indicator that the application is "Pending"' do
-      before do
+      describe 'And I click a button to submit this application,And I see an indicator that the application is "Pending"' do
+        before do
         PetForm.create!(pet_id: @pet_1.id, form_id: @app_1.id)
-      end
+        end
 
       it 'And I do not see a section to add more pets to this application' do
         visit "/forms/#{@app_1.id}"
 
         fill_in :description, with: "I want a pet."
 
-        click_button "Submit Description"
+        click_button "Submit Application"
 
         expect(page).to have_content("Pending")
         expect(page).to have_content("Scooby")
         expect(page).to_not have_content("Add A Pet To This Application")
+        expect(page).to_not have_button("Submit Application")
+      end
+    end
+
+   # 7. No Pets on an Application
+
+    describe "And I have not added any pets to the application." do
+      it 'Then I do not see a section to sumbit my app.' do
+        visit "/forms/#{@app_1.id}"
+
+        expect(page).to_not have_content("Description")
+        expect(page).to_not have_button("Submit Application")
       end
     end
   end
