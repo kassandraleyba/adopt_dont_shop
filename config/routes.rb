@@ -43,4 +43,8 @@ Rails.application.routes.draw do
   patch '/forms/:id', to: 'forms#update'
 
   post '/forms/:id/pet_forms', to: 'pet_forms#create'
+
+  namespace :admin do
+    resources :shelters
+  end
 end
