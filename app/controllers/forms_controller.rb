@@ -19,10 +19,15 @@ class FormsController < ApplicationController
       form.save
       redirect_to "/forms/#{form.id}"
     else 
-      flash.now[:messages] = form.errors.full_messages
-      # redirect_to "/forms/#{form_params[:id]}/new"
-      render :new
+      flash[:error] = form.errors.full_messages
+      redirect_to "/forms/new"
     end
+  end
+
+  def update
+    form = Form.find(params[:id])
+    form.update(description: params[:description], status: 1)
+    redirect_to "/forms/#{form.id}"
   end
 
   def form_params
