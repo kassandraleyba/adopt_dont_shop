@@ -24,8 +24,8 @@
 <% elsif @form.pets.size > 0  %>
    <%= form_with url: "/forms/#{@form.id}", method: :patch, local: true do |f| %>
     <%= f.label :description %>:
-    <%= f.text_area :description %>
-    <%= f.submit "Submit Description" %>
+    <%= f.text_area :description, required: true %>
+    <%= f.submit "Submit Application" %>
   <% end %>
 <% end %>
 
