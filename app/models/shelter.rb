@@ -5,6 +5,8 @@ class Shelter < ApplicationRecord
 
   has_many :pets, dependent: :destroy
 
+  # scope :reverse_alphabetical, -> { order(name: :desc) }
+
   def self.order_by_recently_created
     order(created_at: :desc)
   end
@@ -30,5 +32,10 @@ class Shelter < ApplicationRecord
 
   def shelter_pets_filtered_by_age(age_filter)
     adoptable_pets.where('age >= ?', age_filter)
+  end
+
+  def self.reverse_alphabetical
+    # order(name: :desc)
+    find_by_sql("SELECT * FROM shelters ORDER BY name DESC")
   end
 end
