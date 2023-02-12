@@ -104,6 +104,11 @@ RSpec.describe 'Form page', type: :feature do
         click_button "Pet Submit"
 
         expect(page).to have_content("Scooby")
+
+        fill_in :search, with: "scoo"
+        click_button "Pet Submit"
+
+        expect(page).to have_content("Scooby")
       end
     end
   end
