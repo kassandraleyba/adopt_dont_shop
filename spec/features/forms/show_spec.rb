@@ -111,5 +111,28 @@ RSpec.describe 'Form page', type: :feature do
         expect(page).to have_content("Scooby")
       end
     end
+
+    # 9. Case Insensitive Matches for Pet Names
+
+    describe "Then my search is case insensitive" do
+      it 'For example, if I search for "fluff", my search would match pets with names "Fluffy", "FLUFF", and "Mr. FlUfF"' do
+        visit "/forms/#{@app_1.id}"
+
+        fill_in :search, with: "ScooBy"
+        click_button "Pet Submit"
+
+        expect(page).to have_content("Scooby")
+
+        fill_in :search, with: "Scooby"
+        click_button "Pet Submit"
+
+        expect(page).to have_content("Scooby")
+
+        fill_in :search, with: "SCOOBY"
+        click_button "Pet Submit"
+
+        expect(page).to have_content("Scooby")
+      end
+    end
   end
 end

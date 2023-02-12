@@ -31,7 +31,7 @@
 
 <% if params[:search] %>
   <% @pet_search.each do |pet| %>
-    <%= pet.name %> 
+    <%= pet.name %>  
     <%= button_to "Adopt this Pet", "/forms/#{@form.id}/pet_forms", method: :post, params: {pet_id: pet.id} %>
   <% end %>
 <% end%>
