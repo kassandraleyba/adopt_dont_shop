@@ -88,5 +88,28 @@ RSpec.describe 'Form page', type: :feature do
         expect(page).to_not have_button("Submit Application")
       end
     end
+
+    # 8. Partial Matches for Pet Names
+
+    describe "Then I see any pet whose name PARTIALLY matches my search" do
+      it 'For example, if I search for "fluff", my search would match pets with names "fluffy", "fluff", and "mr. fluff"' do
+        visit "/forms/#{@app_1.id}"
+
+        fill_in :search, with: "Scooby"
+        click_button "Pet Submit"
+
+        expect(page).to have_content("Scooby")
+
+        fill_in :search, with: "scooby"
+        click_button "Pet Submit"
+
+        expect(page).to have_content("Scooby")
+
+        fill_in :search, with: "scoo"
+        click_button "Pet Submit"
+
+        expect(page).to have_content("Scooby")
+      end
+    end
   end
 end
