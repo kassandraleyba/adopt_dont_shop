@@ -1,5 +1,5 @@
 
-<%= form_with url: "/forms/new", method: :post, local: true do |form| %>
+<%= form_with url: "/forms", method: :post, local: true do |form| %>
 
   <%= form.label :name, "Name:"  %>
   <%= form.text_field :name, required: true %> 
@@ -16,11 +16,5 @@
   <%= form.label :zip_code, "Zip Code:" %>
   <%= form.text_field :zip_code %>
   <br><br>
-  <%= form.label :description, "Description:" %>
-  <%= form.text_area :description %>
-  <br><br>
-  <%= form.label :status, "Application Status:" %>
-  <%= form.text_area :status %>
-  <%# # drop down  %>
   <%= form.submit "Submit" %>
 <% end %>
