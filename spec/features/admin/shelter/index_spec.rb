@@ -21,10 +21,26 @@ RSpec.describe 'Admin/Shelter Page' do
     it 'Then I see all Shelters in the system listed in reverse alphabetical order by name' do
       visit '/admin/shelters'
 
-      # save_and_open_page
       expect(@shelter_1.name).to appear_before(@shelter_2.name)
       expect(@shelter_2.name).to appear_before(@shelter_3.name)
       expect(@shelter_3.name).to_not appear_before([@shelter_3.name, @shelter_2.name])
+    end
+
+    it 'Then I see a section for "Shelters with Pending Applications"
+    And in this section I see the name of every shelter that has a pending application' do
+      @pet_1 = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: false)
+      @app_1 = Form.create!(name: "John Smith", street_address: "123 Main St.", city: "Denver", state: "CO", zip_code: 80202, description: "I want a pet.", status: 1)
+      @pet_form_1 = PetForm.create!(pet_id: @pet_1.id, form_id: @app_1.id)
+
+      visit '/admin/shelters'
+      
+      expect(current_path).to eq('/admin/shelters')
+      expect(page).to have_content("Shelters with Pending Applications")
+
+      within("section#pending_apps") do
+      expect(page).to have_content(@shelter_1.name)
+      expect(page).to have_no_content(@shelter_2.name)
+    end 
     end
   end
 end
