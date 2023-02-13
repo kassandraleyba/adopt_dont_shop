@@ -21,6 +21,8 @@ RSpec.describe Shelter, type: :model do
     @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
     @pet_3 = @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
     @pet_4 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+    @app_1 = Form.create!(name: "John Smith", street_address: "123 Main St.", city: "Denver", state: "CO", zip_code: 80202, description: "I want a pet.", status: 1)
+    @pet_form_1 = PetForm.create!(pet_id: @pet_1.id, form_id: @app_1.id)
   end
 
   describe 'class methods' do
@@ -45,6 +47,12 @@ RSpec.describe Shelter, type: :model do
     describe '#reverse_alphabetical' do
       it 'returns shelters in reverse alphabetical order' do
         expect(Shelter.reverse_alphabetical).to eq([@shelter_2, @shelter_3, @shelter_1]) 
+      end
+    end
+
+    describe '#pending_app' do
+      it 'returns shelters with pending pet adoption forms' do
+        expect(Shelter.pending_app).to eq([@shelter_1])
       end
     end
   end

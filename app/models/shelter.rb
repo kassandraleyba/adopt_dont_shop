@@ -38,4 +38,8 @@ class Shelter < ApplicationRecord
     # order(name: :desc)
     find_by_sql("SELECT * FROM shelters ORDER BY name DESC")
   end
+
+  def self.pending_app
+    joins(pets: :forms).where(forms: {status: 1})
+  end
 end
