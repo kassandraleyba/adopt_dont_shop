@@ -11,11 +11,11 @@ RSpec.describe "create" do
     it 'Then I am taken to the new applications show page' do
       visit '/forms/new'
   
-      fill_in "Name:", with: "John Smith"
-      fill_in "Street Address:", with: "123 Main St."
-      fill_in "City:", with: "Denver"
-      fill_in "State:", with: "CO"
-      fill_in "Zip Code:", with: 80202
+      fill_in "Name", with: "John Smith"
+      fill_in "Street Address", with: "123 Main St."
+      fill_in "City", with: "Denver"
+      fill_in "State", with: "CO"
+      fill_in "Zip Code", with: 80202
   
       click_button "Submit"
 
@@ -36,10 +36,10 @@ RSpec.describe "create" do
     it 'Then I am taken back to the new applications page and I see a message that I must fill in those fields.' do
       visit '/forms/new'
       
-      fill_in "Name:", with: "John Smith"
-      fill_in "Street Address:", with: "123 Main St."
-      fill_in "City:", with: "Denver"
-      fill_in "State:", with: "CO"
+      fill_in "Name", with: "John Smith"
+      fill_in "Street Address", with: "123 Main St."
+      fill_in "City", with: "Denver"
+      fill_in "State", with: "CO"
 
       click_button "Submit"
 

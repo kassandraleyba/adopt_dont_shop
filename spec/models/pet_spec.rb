@@ -39,4 +39,17 @@ RSpec.describe Pet, type: :model do
       end
     end
   end
+
+  describe 'instance methods' do
+    before :each do
+      @app_1 = Form.create!(name: "John Smith", street_address: "123 Main St.", city: "Denver", state: "CO", zip_code: 80202, description: "I want a pet.", status: 1)
+      @pet_form_1 = PetForm.create!(pet_id: @pet_3.id, form_id: @app_1.id)
+    end
+
+    describe '.approved' do
+      it 'returns the pet status' do
+        expect(@pet_3.approved(@app_1.id)).to eq("Pending")
+      end
+    end
+  end
 end
