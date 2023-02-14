@@ -1,13 +1,14 @@
 class Admin::FormsController < ApplicationController
   def show
     @form = Form.find(params[:id])
-    @pets = @form.pets
   end
 
   def update
-    form = Form.find(params[:id])
-    form.update(status: params[:status])
+    @form = Form.find(params[:id])
+    pet_form = PetForm.where(form_id: params[:id], pet_id: params[:pet_id]).first
+
+    pet_form.update(pet_status: params[:status].to_i)
    
-    redirect_to "/admin/forms/#{form.id}"
+    redirect_to "/admin/forms/#{@form.id}"
   end
 end

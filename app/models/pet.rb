@@ -13,4 +13,8 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def approved(form_id) #<== test this.
+    pet_forms.where(form_id: form_id).first.pet_status
+  end
 end
