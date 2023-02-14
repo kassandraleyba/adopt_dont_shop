@@ -37,9 +37,9 @@ RSpec.describe 'Admin/Shelter Page' do
       expect(current_path).to eq('/admin/shelters')
       expect(page).to have_content("Shelters with Pending Applications")
 
-      within("section#pending_apps") do
+      within("div#pending-apps") do
       expect(page).to have_content(@shelter_1.name)
-      expect(page).to have_no_content(@shelter_2.name)
+      expect(page).to_not have_content(@shelter_2.name)
     end 
     end
   end
