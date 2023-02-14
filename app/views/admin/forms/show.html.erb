@@ -1,4 +1,4 @@
-<p><%= @form.name %>'s Application for Adoption<p>
+<p><%= @form.name %>'s Application for Pet Adoption<p>
 
 <p><%= "Name of Applicant: #{@form.name}"%><p>
 <p><%= "Street Address: #{@form.street_address}"%><p>
@@ -9,14 +9,20 @@
 <%= "Application Status: #{@form.status}" %>
 <br><br>
 <h3>Names of Pets:</h3>
-  <% @form.pets.each do |pet|  %>
+  <% @pets.each do |pet|  %>
       <%= link_to pet.name, "/pets/#{pet.id}" %>
 
     <% if @form.status == "Pending" %>
         <%= button_to "Approve Application", "/admin/forms/#{@form.id}", method: :patch, params: { status: "Accepted" } %>
-      <% else %>
+        <br>
+        <%= button_to "Reject Application", "/admin/forms/#{@form.id}", method: :patch, params: { status: "Rejected" } %>
+      <% elsif @form.status == "Accepted" %>
         <br><br>
         <%= "#{pet.name}'s application has been successfully accepted!!" %>
+        <br><br>
+        <% elsif @form.status == "Rejected" %>
+        <br><br>
+        <%= "#{pet.name}'s application has been rejected." %>
         <br><br>
     <% end %>
 
