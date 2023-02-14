@@ -43,8 +43,9 @@ Rails.application.routes.draw do
   patch '/forms/:id', to: 'forms#update'
 
   post '/forms/:id/pet_forms', to: 'pet_forms#create'
+  
+  get '/admin/shelters', to: 'admin/shelters#index'
 
-  namespace :admin do
-    resources :shelters
-  end
+  get '/admin/forms/:id', to: 'admin/forms#show'
+  patch '/admin/forms/:id', to: 'admin/forms#update'
 end

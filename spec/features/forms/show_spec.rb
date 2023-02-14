@@ -46,11 +46,14 @@ RSpec.describe 'Form page', type: :feature do
         
         it "Then next to each Pet's name I see a button to 'Adopt this Pet' When I click one of these buttons. Then I am taken back to the application show page And I see the Pet I want to adopt listed on this application" do
           visit "forms/#{@app_1.id}"
+          
           fill_in :search, with: "Scooby"
           click_button "Pet Submit"
           
           expect(page).to have_button('Adopt this Pet')
+
           click_button "Adopt this Pet"
+
           expect(current_path).to eq("/forms/#{@app_1.id}")
           expect(page).to have_content("Names of Pets: Scooby")
         end

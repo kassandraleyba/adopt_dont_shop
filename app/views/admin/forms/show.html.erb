@@ -1,0 +1,23 @@
+<p><%= @form.name %>'s Application for Adoption<p>
+
+<p><%= "Name of Applicant: #{@form.name}"%><p>
+<p><%= "Street Address: #{@form.street_address}"%><p>
+<p><%= "City: #{@form.city}"%><p>
+<p><%= "State: #{@form.state}"%><p>
+<p><%= "Zip Code: #{@form.zip_code}"%><p>
+
+<%= "Application Status: #{@form.status}" %>
+<br><br>
+<h3>Names of Pets:</h3>
+  <% @form.pets.each do |pet|  %>
+      <%= link_to pet.name, "/pets/#{pet.id}" %>
+
+    <% if @form.status == "Pending" %>
+        <%= button_to "Approve Application", "/admin/forms/#{@form.id}", method: :patch, params: { status: "Accepted" } %>
+      <% else %>
+        <br><br>
+        <%= "#{pet.name}'s application has been successfully accepted!!" %>
+        <br><br>
+    <% end %>
+
+  <% end %>
