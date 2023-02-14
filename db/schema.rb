@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2023_02_10_213344) do
   create_table "pet_forms", force: :cascade do |t|
     t.bigint "pet_id"
     t.bigint "form_id"
+    t.integer "pet_status", default: 0
     t.index ["form_id"], name: "index_pet_forms_on_form_id"
     t.index ["pet_id"], name: "index_pet_forms_on_pet_id"
   end
