@@ -9,21 +9,19 @@
 <%= "Application Status: #{@form.status}" %>
 <br><br>
 <h3>Names of Pets:</h3>
-  <% @pets.each do |pet|  %>
+  <% @form.pets.each do |pet|  %>
       <%= link_to pet.name, "/pets/#{pet.id}" %>
-
-    <% if @form.status == "Pending" %>
-        <%= button_to "Approve Application", "/admin/forms/#{@form.id}", method: :patch, params: { status: "Accepted" } %>
-        <br>
-        <%= button_to "Reject Application", "/admin/forms/#{@form.id}", method: :patch, params: { status: "Rejected" } %>
-      <% elsif @form.status == "Accepted" %>
-        <br><br>
-        <%= "#{pet.name}'s application has been successfully accepted!!" %>
-        <br><br>
-        <% elsif @form.status == "Rejected" %>
-        <br><br>
-        <%= "#{pet.name}'s application has been rejected." %>
-        <br><br>
-    <% end %>
-
+      <% if pet.approved(@form.id) == "Pending" %>
+      <%= button_to "Approve Pet", "/admin/forms/#{@form.id}", method: :patch, params: { status: 1, pet_id: pet.id } %>
+      <br>
+      <%= button_to "Reject Pet", "/admin/forms/#{@form.id}", method: :patch, params: { status: 2, pet_id: pet.id } %>
+      <% elsif pet.approved(@form.id) == "Approved" %>
+      <br><br>
+      <%= "#{pet.name} has been successfully accepted!!" %>
+      <br><br>
+      <% elsif pet.approved(@form.id) == "Rejected" %>
+      <br><br>
+      <%= "#{pet.name} has been rejected." %>
+      <br><br>
+      <% end %>
   <% end %>

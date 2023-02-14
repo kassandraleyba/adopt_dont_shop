@@ -18,13 +18,13 @@ RSpec.describe 'Admin/Forms Show Page' do
         it "And next to the pet that I approved, I see an indicator next to the pet that they have been approved" do
           visit "/admin/forms/#{@app_1.id}"
 
-          expect(page).to have_button("Approve Application")
+          expect(page).to have_button("Approve Pet")
 
-          click_button "Approve Application"
+          click_button "Approve Pet"
         
           expect(current_path).to eq("/admin/forms/#{@app_1.id}")
-          expect(page).to have_content("#{@pet_1.name}'s application has been successfully accepted!!")
-          expect(page).to_not have_button("Approve Application")
+          expect(page).to have_content("#{@pet_1.name} has been successfully accepted!!")
+          expect(page).to_not have_button("Approve Pet")
         end
       end  
     end
@@ -36,14 +36,14 @@ RSpec.describe 'Admin/Forms Show Page' do
         it "And next to the pet that I rejected, I see an indicator next to the pet that they have been rejected" do
           visit "/admin/forms/#{@app_1.id}"
 
-          expect(page).to have_button("Reject Application")
+          expect(page).to have_button("Reject Pet")
 
-          click_button "Reject Application"
+          click_button "Reject Pet"
         
           expect(current_path).to eq("/admin/forms/#{@app_1.id}")
-          expect(page).to have_content("#{@pet_1.name}'s application has been rejected.")
-          expect(page).to_not have_button("Reject Application")
-          expect(page).to_not have_button("Approve Application")
+          expect(page).to have_content("#{@pet_1.name} has been rejected.")
+          expect(page).to_not have_button("Reject Pet")
+          expect(page).to_not have_button("Approve Pet")
         end
       end  
     end
@@ -53,15 +53,15 @@ RSpec.describe 'Admin/Forms Show Page' do
     describe "When there are two applications in the system for the same pet" do
       describe "When I visit the admin application show page for one of the applications and I approve or reject the pet for that application When I visit the other application's admin show page then I do not see that the pet has been accepted or rejected for that application" do
         it "And instead I see buttons to approve or reject the pet for this specific application" do
-          
+
           visit "/admin/forms/#{@app_1.id}"
-          click_button "Reject Application"
+          click_button "Reject Pet"
           expect(current_path).to eq("/admin/forms/#{@app_1.id}")
 
           visit "/admin/forms/#{@app_2.id}"
           
-          expect(page).to have_button("Approve Application")
-          expect(page).to have_button("Reject Application")
+          expect(page).to have_button("Approve Pet")
+          expect(page).to have_button("Reject Pet")
         end
       end  
     end
