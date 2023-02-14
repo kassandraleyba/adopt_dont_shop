@@ -5,7 +5,7 @@ class Admin::FormsController < ApplicationController
 
   def update
     @form = Form.find(params[:id])
-    pet_form = PetForm.where(form_id: params[:id], pet_id: params[:pet_id]).first
+    pet_form = PetForm.find_params(params[:id], params[:pet_id])
 
     pet_form.update(pet_status: params[:status].to_i)
    

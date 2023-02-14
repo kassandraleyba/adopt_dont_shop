@@ -16,12 +16,12 @@
         <%= msg %>
       </div>
     <% end %>
-    <section>
-      <p><%= link_to "Pets", "/pets" %></p>
-      <p><%= link_to "Shelters", "/shelters" %></p>
-      <p><%= link_to "Veterinarians", "/veterinarians" %></p>
-      <p><%= link_to "Veterinary Offices", "/veterinary_offices" %></p>
-    </section>
+    <div class="primary-nav-bar">
+      <%= link_to "Pets", "/pets", :class => "primary-nav-buttons" %>
+      <%= link_to "Shelters", "/shelters", :class => "primary-nav-buttons" %>
+      <%= link_to "Veterinarians", "/veterinarians", :class => "primary-nav-buttons" %>
+      <%= link_to "Veterinary Offices", "/veterinary_offices", :class => "primary-nav-buttons" %>
+    </div>
     <%= yield %>
   </body>
 </html>
