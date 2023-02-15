@@ -1,8 +1,8 @@
 <div class="pet-app-main">
   <h1>Pet Application</h1>
 
-  <div class="pet-application">
-    <%= form_with url: "/forms", method: :post, local: true do |form| %>
+<div class="pet-application">
+  <%= form_with url: '/forms', method: :post, local: true do |form| %>
 
       <%= form.label :name, "Name"  %> <br>
       <%= form.text_field :name, required: true %> 

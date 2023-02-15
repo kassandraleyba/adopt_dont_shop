@@ -31,6 +31,6 @@ class FormsController < ApplicationController
   end
 
   def form_params
-    params.permit(:name, :street_address, :city, :state, :zip_code, :description, :status)
+    params.permit(:name, :street_address, :city, :state, :zip_code)
   end
 end
