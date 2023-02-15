@@ -1,27 +1,36 @@
-<p><%= @form.name %>'s Application for Pet Adoption<p>
+<div class="pet-app-main">
+  <h1>Application for Pet Adoption</h1>
+</div>
 
-<p><%= "Name of Applicant: #{@form.name}"%><p>
-<p><%= "Street Address: #{@form.street_address}"%><p>
-<p><%= "City: #{@form.city}"%><p>
-<p><%= "State: #{@form.state}"%><p>
-<p><%= "Zip Code: #{@form.zip_code}"%><p>
+<div class="pet-app-main">
+  <p><%= "Name of Applicant: #{@form.name}"%><p>
+  <p><%= "Street Address: #{@form.street_address}"%><p>
+  <p><%= "City: #{@form.city}"%><p>
+  <p><%= "State: #{@form.state}"%><p>
+  <p><%= "Zip Code: #{@form.zip_code}"%><p>
 
-<%= "Application Status: #{@form.status}" %>
-<br><br>
-<h3>Names of Pets:</h3>
+  Application Status: <%= @form.status %><br><br>
+</div>
+
+<div class="pet-app-main">
+  <h3>Names of Pets:</h3>
+
   <% @form.pets.each do |pet|  %>
-      <%= link_to pet.name, "/pets/#{pet.id}" %>
-      <% if pet.approved(@form.id) == "Pending" %>
-      <%= button_to "Approve Pet", "/admin/forms/#{@form.id}", method: :patch, params: { status: 1, pet_id: pet.id } %>
-      <br>
-      <%= button_to "Reject Pet", "/admin/forms/#{@form.id}", method: :patch, params: { status: 2, pet_id: pet.id } %>
-      <% elsif pet.approved(@form.id) == "Approved" %>
-      <br><br>
-      <%= "#{pet.name} has been successfully accepted!!" %>
-      <br><br>
-      <% elsif pet.approved(@form.id) == "Rejected" %>
-      <br><br>
-      <%= "#{pet.name} has been rejected." %>
-      <br><br>
-      <% end %>
+    <div class="admin-container">
+      <div class="admin-left">
+        <%= link_to pet.name, "/pets/#{pet.id}", :class => "pet-name"  %>
+      </div>
+
+      <div class="admin-right">
+        <% if pet.approved(@form.id) == "Pending" %>
+          <%= button_to "Approve Pet", "/admin/forms/#{@form.id}", method: :patch, params: { status: 1, pet_id: pet.id }, :class => "submit-button"  %> <br>
+          <%= button_to "Reject Pet", "/admin/forms/#{@form.id}", method: :patch, params: { status: 2, pet_id: pet.id }, :class => "submit-button"  %><br><br>
+        <% elsif pet.approved(@form.id) == "Approved" %>
+          <%= "#{pet.name} has been successfully accepted!!" %><br><br>
+        <% elsif pet.approved(@form.id) == "Rejected" %><br><br>
+          <%= "#{pet.name} has been rejected." %><br><br>
+        <% end %>
+      </div>
+    </div>
   <% end %>
+</div>

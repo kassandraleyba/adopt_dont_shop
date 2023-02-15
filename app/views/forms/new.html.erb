@@ -1,23 +1,25 @@
-<h1>Pet Application</h1>
+<div class="pet-app-main">
+  <h1>Pet Application</h1>
 
-<div class="pet-application">
-  <%= form_with url: "/forms", method: :post, local: true do |form| %>
+  <div class="pet-application">
+    <%= form_with url: "/forms", method: :post, local: true do |form| %>
 
-    <%= form.label :name, "Name"  %> <br>
-    <%= form.text_field :name, required: true %> 
-    <br><br>
-    <%= form.label :street_address, "Street Address" %> <br>
-    <%= form.text_field :street_address %> 
-    <br><br>
-    <%= form.label :city, "City" %> <br>
-    <%= form.text_field :city %> 
-    <br><br>
-    <%= form.label :state, "State" %> <br>
-    <%= form.text_field :state %> 
-    <br><br>
-    <%= form.label :zip_code, "Zip Code" %> <br>
-    <%= form.text_field :zip_code %>
-    <br><br>
-    <%= form.submit "Submit", :class => "submit-button" %>
-  <% end %>
+      <%= form.label :name, "Name"  %> <br>
+      <%= form.text_field :name, required: true %> 
+      <br><br>
+      <%= form.label :street_address, "Street Address" %> <br>
+      <%= form.text_field :street_address %> 
+      <br><br>
+      <%= form.label :city, "City" %> <br>
+      <%= form.text_field :city %> 
+      <br><br>
+      <%= form.label :state, "State" %> <br>
+      <%= form.text_field :state %> 
+      <br><br>
+      <%= form.label :zip_code, "Zip Code" %> <br>
+      <%= form.text_field :zip_code %>
+      <br><br>
+      <%= form.submit "Submit", :class => "submit-button" %>
+    <% end %>
+  </div>
 </div>

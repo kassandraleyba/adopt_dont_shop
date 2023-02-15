@@ -1,8 +1,13 @@
-<h1><%= @pet.name %></h1>
-<h3><%= @pet.age %> years old</h3>
-<h3><%= @pet.breed %></h3>
-<h3><%= @pet.adoptable %></h3>
-<h3><%= @pet.shelter_name %></h3>
+<div class="pet-app-main">
+  <h1><%= @pet.name %></h1>
+</div>
 
-<p><%= link_to "Update #{@pet.name}", "pets/#{@pet.id}/edit" %></p>
-<p><%= link_to "Delete #{@pet.name}", "/pets/#{@pet.id}", method: :delete %></p>
+<div class="pet-app-main">
+  <h3>Age</h3> <%= @pet.age %> years old
+  <h3>Breed</h3> <%= @pet.breed %>
+  <h3>Adoptable</h3> <%= @pet.adoptable %>
+  <h3>Shelter</h3> <%= @pet.shelter_name %>
+
+  <p><%= link_to "Update #{@pet.name}", "pets/#{@pet.id}/edit", :class => "submit-button" %></p>
+  <p><%= link_to "Delete #{@pet.name}", "/pets/#{@pet.id}", method: :delete, :class => "submit-button" %></p>
+</div>
