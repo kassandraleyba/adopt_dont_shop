@@ -93,9 +93,9 @@ RSpec.describe 'the pets index' do
 
       visit '/pets'
 
-      expect(page).to have_link("Start an Application")
+      expect(page).to have_link("Start Application")
       
-      click_link "Start an Application"
+      click_link "Start Application"
 
       expect(current_path).to eq("/forms/new")
     end

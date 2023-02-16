@@ -1,37 +1,45 @@
-<p><%= @form.name =%>'s Application for Adoption<p>
-<%= @form.id %>
-<p><%= "Name of Applicant: #{@form.name}"%><p>
-<p><%= "Street Address: #{@form.street_address}"%><p>
-<p><%= "City: #{@form.city}"%><p>
-<p><%= "State: #{@form.state}"%><p>
-<p><%= "Zip Code: #{@form.zip_code}"%><p>
+<div class="main-container">
+  <div class="pet-app-main">
+    <h1>Application for Adoption</h1>
+  </div>
 
-<p>Names of Pets: 
-  <% @form.pets.each do |pet| %>
-    <%=link_to pet.name, "/pets/#{pet.id}" %> 
+  <div class="pet-app-main">
+  <div class="application-page">
+    <p><%= "Name of Applicant: #{@form.name}"%></p>
+    <p><%= "Street Address: #{@form.street_address}"%></p>
+    <p><%= "City: #{@form.city}"%></p>
+    <p><%= "State: #{@form.state}"%></p>
+    <p><%= "Zip Code: #{@form.zip_code}"%></p>
+
+    <p>Names of Pets: 
+      <% @form.pets.each do |pet| %>
+        <%=link_to pet.name, "/pets/#{pet.id}", :class => "pet-name" %> 
+        <% end %>
+    <p><%= "Application Status: #{@form.status}"%></p><br>
+
+    <% if @form.status == "In Progress" %>
+      <%= form_with url: "/forms/#{@form.id}", method: :get, local: true do |f| %>
+        <%= f.label :search, "Add A Pet To This Application" %>:<br><br>
+        <%= f.text_field :search, :class => "progress-label" %><br>
+        <%= f.submit "Pet Submit", :class => "submit-button" %>
+      <% end %><br>
     <% end %>
-<p><%= "Application Status: #{@form.status}"%><p>
+  </div>
 
-<% if @form.status == "In Progress" %>
-  <%= form_with url: "/forms/#{@form.id}", method: :get, local: true do |f| %>
-    <%= f.label :search, "Add A Pet To This Application" %>:
-    <%= f.text_field :search %>
-    <%= f.submit "Pet Submit" %>
+  <% if @form.status == "Pending"%>
+  <% elsif @form.pets.size > 0  %>
+    <%= form_with url: "/forms/#{@form.id}", method: :patch, local: true do |f| %>
+      <%= f.label :description %><br>
+      <%= f.text_area :description, required: true %><br>
+      <%= f.submit "Submit Application", :class => "submit-button" %>
+    <% end %>
   <% end %>
-<% end %>
 
-<% if @form.status == "Pending"%>
-<% elsif @form.pets.size > 0  %>
-   <%= form_with url: "/forms/#{@form.id}", method: :patch, local: true do |f| %>
-    <%= f.label :description %>:
-    <%= f.text_area :description, required: true %>
-    <%= f.submit "Submit Application" %>
-  <% end %>
-<% end %>
-
-<% if params[:search] %>
-  <% @pet_search.each do |pet| %>
-    <%= pet.name %>  
-    <%= button_to "Adopt this Pet", "/forms/#{@form.id}/pet_forms", method: :post, params: {pet_id: pet.id} %>
-  <% end %>
-<% end%>
+  <% if params[:search] %>
+    <% @pet_search.each do |pet| %>
+      <%= pet.name %> 
+      <%= button_to "Adopt this Pet", "/forms/#{@form.id}/pet_forms", method: :post, params: {pet_id: pet.id}, :class => "submit-button" %>
+    <% end %>
+  <% end%>
+  </div>
+</div>
