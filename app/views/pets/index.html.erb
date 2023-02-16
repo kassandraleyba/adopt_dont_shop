@@ -1,40 +1,42 @@
-<div class="pet-top">
-  <h1>All Pets</h1>
+<div class="main-container">
+  <div class="pet-top">
+    <h1>All Pets</h1>
 
-  <div class="pet-page">
-    <%= form_with url: "/pets", method: :get, local: true, :class => "search-bar" do |f| %>
-      <div class="column-left">
-        <%= f.label :search %><br>
-        <%= f.text_field :search, :class => "search-label" %><br>
-        <%= f.submit "Search", :class => "submit-button" %><br>
+    <div class="pet-page">
+      <%= form_with url: "/pets", method: :get, local: true, :class => "search-bar" do |f| %>
+        <div class="column-left">
+          <%= f.label :search %><br>
+          <%= f.text_field :search, :class => "label" %><br>
+          <%= f.submit "Search", :class => "submit-button" %><br>
+        </div>
+      <% end %>
+
+      <div class="column-right">
+        <%= link_to "Start Application", "/forms/new", :class => "application-button" %>
       </div>
-    <% end %>
 
-    <div class="column-right">
-      <%= link_to "Start Application", "/forms/new", :class => "application-button" %>
     </div>
-
   </div>
+
+  <div class="pets-container">
+    <% @pets.each do |pet| %>
+      <div class="column-left">
+        <h3><%= pet.name %></h3>
+      </div>
+
+      <div class="column-right">
+        <div class="description">
+          <p>Age: <%= pet.age %></p>
+          <p>Breed: <%= pet.breed %></p>
+          <p>Adoptable</p>
+          <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
+        </div>
+
+        <div class="edit-buttons">
+          <%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit", :class => "submit-button" %>
+          <%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete, :class => "submit-button" %>
+        </div>
+      </div><br><br>
+    <% end %>
+  </div><br><br>
 </div>
-
-<div class="pets-container">
-  <% @pets.each do |pet| %>
-    <div class="column-left">
-      <h3><%= pet.name %></h3>
-    </div>
-
-    <div class="column-right">
-      <div class="description">
-        <p>Age: <%= pet.age %></p>
-        <p>Breed: <%= pet.breed %></p>
-        <p>Adoptable</p>
-        <p>You can find <%= pet.name %> at <%= pet.shelter_name %>!</p>
-      </div>
-
-      <div class="edit-buttons">
-        <%= link_to "Edit #{pet.name}", "/pets/#{pet.id}/edit", :class => "submit-button" %>
-        <%= link_to "Delete #{pet.name}", "/pets/#{pet.id}", method: :delete, :class => "submit-button" %>
-      </div>
-    </div><br><br>
-  <% end %>
-</div><br><br>
